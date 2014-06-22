@@ -1,0 +1,11 @@
+{
+  "name": "nsdcss-spacing-margin",
+  "version": "0.1.0",
+  "main": "spacing.margin.less",
+  "author": "Nikolaj Sokolowski",
+  "license": "MIT",
+  "nsdcss": {
+    "order": "010",
+    "scope": "framework"
+  }
+}

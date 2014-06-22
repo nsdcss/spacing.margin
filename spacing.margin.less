@@ -1,0 +1,68 @@
+/*------------------------------------*\
+    $MARGIN
+\*------------------------------------*/
+
+.set-modified-margins(@counter, @bpClass: ~'') when (@counter > 0) {
+	.set-modified-margins((@counter - 1), @bpClass); // next iteration
+	@cur-list: extract(@u__multiplier-list, @counter);
+	@cur-modifier-name: extract(@cur-list, 1);
+	@cur-modifier-value: extract(@cur-list, 2);
+
+	.@{cf__framework-prefix}margin--@{cur-modifier-name}@{bpClass} {
+		margin: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		margin: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+
+	.@{cf__framework-prefix}margin-left--@{cur-modifier-name}@{bpClass} {
+		margin-left: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		margin-left: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+
+	.@{cf__framework-prefix}margin-right--@{cur-modifier-name}@{bpClass} {
+		margin-right: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		margin-right: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+
+	.@{cf__framework-prefix}margin-top--@{cur-modifier-name}@{bpClass} {
+		margin-top: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		margin-top: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+
+	.@{cf__framework-prefix}margin-bottom--@{cur-modifier-name}@{bpClass} {
+		margin-bottom: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		margin-bottom: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+
+	.@{cf__framework-prefix}margin-hor--@{cur-modifier-name}@{bpClass} {
+		margin-left: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		margin-left: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+		margin-right: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		margin-right: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+
+	.@{cf__framework-prefix}margin-vert--@{cur-modifier-name}@{bpClass} {
+		margin-top: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		margin-top: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+		margin-bottom: @s__base-spacing-unit * @cur-modifier-value * 1px;
+		margin-bottom: (@s__base-spacing-unit/@t__base-font-size) * @cur-modifier-value * 1rem;
+	}
+}
+
+.make-responsive-margins(@counter) when (@counter > 0) {
+	.make-responsive-margins((@counter - 1)); // next iteration
+	@cur-list: extract(@bp__bp-list, @counter);
+	@breakpoint-name:  extract(@cur-list, 1);
+	@breakpoint-width:  extract(@cur-list, 2);
+	@media only screen and (min-width:~"@{breakpoint-width}px") {
+		.set-modified-margins(length(@u__multiplier-list), ~"--@{breakpoint-name}");
+	}
+}
+
+.set-modified-margins(length(@u__multiplier-list)); // launch the loop for default margins
+.make-responsive-margins(length(@bp__bp-list)); // launch the loop for responsive margins
+
+// center
+.@{cf__framework-prefix}margin-center {
+	margin-left: auto;
+	margin-right: auto;
+}
