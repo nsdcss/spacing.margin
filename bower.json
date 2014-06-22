@@ -6,9 +6,5 @@
   "license": "MIT",
   "dependencies": {
     "nsdcss-core-variables": "https://github.com/nsdcss/core.variables.git"
-  },
-  "nsdcss": {
-    "order": "010",
-    "scope": "framework"
   }
 }
